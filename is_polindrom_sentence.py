@@ -1,10 +1,15 @@
 def is_polindrom(sentence):
         '''this function checs if the string polindrom or not
-        but dont use none alphabetical symbols. '''
+        '''
         res = []
         nums = sentence.split()
         for num in nums:
                num1 = num.lower()
+               for n in range(len(num1)):
+                     if num1[n] in (',', '.', ':', '!', ';', '?', '`', '(', ')'):
+                            line = num1[:n]     
+                            line += num1[n + 1:]
+                            num1 = line
                res.append(num1)
         ind = len(res) - 1
         rev_res = []
