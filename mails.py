@@ -1,42 +1,16 @@
 def mails(mail):
-    string = mail
+    '''this function returns real mail name.'''
     ind = mail.index('@')
-    _string = mail[:ind]
-    while _string != None:
-      if (('.' and '+') in _string) and (string.index('.') < string.index('+')):
-        if '.' in _string:
-              ind0 = string.index('.')
-              _str = ''
-              for num in range(ind0):
-                  _str += string[num]
-              for  num1 in range(ind0 + 1, len(string)):
-                  _str += string[num1]
-              string = _str 
-              _string = string[ind0 + 1:string.index('@')]
-        elif '+' in _string:
-            ind1 = string.index('+')
-            _str = ''
-            for  i in range(ind1):
-               _str += string[i]
-            ind2 = string.index('@')
-            for j in range(ind2, len(string)):
-               _str += string[j]
-            string = _str
-            _string = None 
-        else:
-             _string = None
-      elif  (('.' and '+') in _string) and (string.index('.') > string.index('+')):
-            if '+' in _string:
-                ind1 = string.index('+')
-                _str = ''
-                for  i in range(ind1):
-                   _str += string[i]
-                ind2 = string.index('@')
-                for j in range(ind2, len(string)):
-                    _str += string[j]
-                string = _str
-                _string = None 
-    return string 
+    name = mail[:ind]
+    domain = mail[ind:]
+    if  '.' in name:
+             name = name.replace('.', '')
+             mail = name + domain
+    if '+' in name:
+              ind1 = mail.index('+')
+              mail = mail[:ind1]
+              mail += domain
+    return mail 
 def count_of_mails(_mails):
      count = 0
      for ind in range(len(_mails)):
@@ -44,4 +18,4 @@ def count_of_mails(_mails):
                     if mails(_mails[ind]) != mails(_mails[ind1]):
                          count += 1
      return count
-print(count_of_mails(["test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"]))
+print(f"mails' count in the list is equal to: {count_of_mails(["test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"])}")
